@@ -16,7 +16,7 @@ segs = [PWM(Pin(a)),
         PWM(Pin(f))]
 
 i = 0
-for _ in range(0, 30):
+while True:
     p = (i + 5) % 6 # poprzedni segment
     n = (i + 1) % 6 # nastepny segment
     for q in range(0, len(segs)):
