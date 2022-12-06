@@ -60,12 +60,11 @@ for _ in range(2):
     utime.sleep(1)
     oled.blit(fbjsm, 0, 0)
     oled.show()
-    
     utime.sleep(1)
     
 
 # naprzemiennie Javka Serce Melba
-for _ in range(2):
+for _ in range(1):
     oled.fill(1)
     oled.contrast(0)
     oled.blit(fbjavka, 44, 0, framebuf.MONO_HLSB)
@@ -103,25 +102,26 @@ def scroll(fb, szer=40, kier=1, end=None):
 def scroll_right(fb, szer=40, end=None):
     scroll(fb, szer=szer, end=end, kier=1)
 
-utime.sleep(1)
-
 def scroll_left(fb, szer=40, end=None):
     scroll(fb, szer=szer, end=end, kier=-1)
 
 
 oled.contrast(0)
 
-for _ in range(2):
+for _ in range(1):
     scroll_right(fbjavka, szer=40)
     scroll_left(fbjavka, szer=40)
 
 oled.contrast(127)
-for _ in range(2):
+for _ in range(1):
     scroll_right(fb, szer=32)
     scroll_left(fb, szer=32)
 
-scroll_right(fb, szer=32)
-scroll_left(fb, szer=32, end=int(WIDTH/2 + 32/2))
+scroll_right(fb, szer=32, end=int(WIDTH/2 + 32/2))
+for i in range(9):
+    utime.sleep_ms(200)
+    oled.invert(i % 2)
+
 
 utime.sleep(5)
 oled.poweroff()
