@@ -87,34 +87,36 @@ for _ in range(1):
     utime.sleep_ms(750)
 
 
-def scroll(fb, szer=40, kier=1, end=None):
+def scroll(fb, szer=40, kier=1, end=None, speed=1):
     bg = fb.pixel(0,0) # 1 dla bialych, 0 dla czarnych
     START = 0
     if kier < 0: START = WIDTH + szer
     if not end: end = WIDTH + szer + 1
     
-    for i in range(end):
+    for i in range(0,end,speed):
         oled.fill(bg)
         oled.blit(fb, START + kier*i - szer, 0, framebuf.MONO_HLSB)
         oled.show()
 
 
-def scroll_right(fb, szer=40, end=None):
-    scroll(fb, szer=szer, end=end, kier=1)
+def scroll_right(fb, szer=40, end=None, speed=1):
+    scroll(fb, szer=szer, end=end, kier=1, speed=speed)
 
-def scroll_left(fb, szer=40, end=None):
-    scroll(fb, szer=szer, end=end, kier=-1)
+def scroll_left(fb, szer=40, end=None, speed=1):
+    scroll(fb, szer=szer, end=end, kier=-1, speed=speed)
 
 
 oled.contrast(0)
 
+
 for _ in range(1):
     scroll_right(fbjavka, szer=40)
-    scroll_left(fbjavka, szer=40)
+    scroll_left(fbjavka, szer=40, speed=2)
+
 
 oled.contrast(127)
 for _ in range(1):
-    scroll_right(fb, szer=32)
+    scroll_right(fb, szer=32, speed=3)
     scroll_left(fb, szer=32)
 
 scroll_right(fb, szer=32, end=int(WIDTH/2 + 32/2))
